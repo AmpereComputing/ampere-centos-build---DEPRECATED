@@ -31,7 +31,7 @@ if [ ${MACHINE_TYPE} = 'x86_64' ]; then
 fi
 
 TODAY=`date +%y%m%d`
-RELBUILD="${TODAY}_daily"
+RELBUILD="${TODAY}"
 if [ -n "${1}" ]; then
 	RELBUILD=${1}
 fi
@@ -58,7 +58,7 @@ echo "Building for generic release tag ${RELBUILD}"
 #Update build release tag to spec file
 #sed -i "s/ buildid \..*/ buildid \.${RELBUILD}+amp/g" ${CENTOSSPECFILE}
 
-rpmbuild --target aarch64 --define "%_topdir `pwd`" --define "buildid .${RELBUILD}+amp" --without debuginfo --without tools --without perf -ba ${CENTOSSPECFILE}
+rpmbuild --target aarch64 --define "%_topdir `pwd`" --define "buildid .${RELBUILD}+amp" --without debug --without debuginfo --without tools --without perf -ba ${CENTOSSPECFILE}
 
 cd RPMS/; tar -cJf ../${CENTOSNAMEPREFIX}-${RELBUILD}.tar.xz aarch64;cd -
 tar -cJf ${CENTOSNAMEPREFIX}-${RELBUILD}.src.tar.xz SRPMS
@@ -70,7 +70,7 @@ echo "Building for optimized release tag ${RELBUILD}"
 #Update build release tag to spec file
 #sed -i "s/ buildid \..*/ buildid \.${RELBUILD}+amp.ilp32/g" ${CENTOSOPTIMIZESPECFILE}
 
-rpmbuild --target aarch64 --define "%_topdir `pwd`" --define "buildid .${RELBUILD}+amp.ilp32" --without debuginfo --without tools --without perf -ba ${CENTOSOPTIMIZESPECFILE}
+rpmbuild --target aarch64 --define "%_topdir `pwd`" --define "buildid .${RELBUILD}+amp.ilp32" --without debug --without debuginfo --without tools --without perf -ba ${CENTOSOPTIMIZESPECFILE}
 
 cd RPMS/; tar -cJf ../${CENTOSNAMEPREFIX}-${RELBUILD}.ilp32.tar.xz aarch64;cd -
 tar -cJf ${CENTOSNAMEPREFIX}-${RELBUILD}.ilp32-src.tar.xz SRPMS
