@@ -155,7 +155,7 @@ Summary: The Linux kernel
 %ifarch aarch64
 %define asmarch arm64
 %define hdrarch arm64
-%define all_arch_configs %{src_pkg_name}-%{version}-xgene-optimized.config
+%define all_arch_configs %{src_pkg_name}-%{version}-xgene-optimized*.config
 %define make_target Image.gz
 %define kernel_image arch/arm64/boot/Image.gz
 %define image_install_path boot
@@ -393,7 +393,9 @@ Source80: %{src_pkg_name}-%{version}-aarch64.config
 Source81: %{src_pkg_name}-%{version}-aarch64-debug.config
 
 Source90: %{src_pkg_name}-%{version}-xgene.config
-Source91: %{src_pkg_name}-%{version}-xgene-optimized.config
+Source91: %{src_pkg_name}-%{version}-xgene-debug.config
+Source92: %{src_pkg_name}-%{version}-xgene-optimized.config
+Source93: %{src_pkg_name}-%{version}-xgene-optimized-debug.config
 
 # Sources for kernel tools
 Source2000: cpupower.service
@@ -824,8 +826,8 @@ BuildKernel() {
     InstallName=${4:-vmlinuz}
 
     # Pick the right config file for the kernel we're building
-    # Config=%{src_pkg_name}-%{version}-%{_target_cpu}${Flavour:+-${Flavour}}.config
-    Config=%{src_pkg_name}-%{version}-xgene-optimized.config
+    Config=%{src_pkg_name}-%{version}-xgene-optimized${Flavour:+-${Flavour}}.config
+    # Config=%{src_pkg_name}-%{version}-xgene-optimized.config
     DevelDir=/usr/src/kernels/%{KVRA}${Flavour:+.${Flavour}}
 
     # When the bootable image is just the ELF kernel, strip it.
@@ -1166,7 +1168,7 @@ find Documentation -type d | xargs chmod u+w
 
 %define __modsign_install_post \
   if [ "%{with_debug}" -ne "0" ]; then \
-    Arch=`head -1 configs/%{src_pkg_name}-%{version}-%{_target_cpu}-debug.config | cut -b 3-` \
+    Arch=`head -1 configs/%{src_pkg_name}-%{version}-xgene-optimized-debug.config | cut -b 3-` \
     rm -rf .tmp_versions \
     mv .tmp_versions.sign.debug .tmp_versions \
     mv signing_key.pem.sign.debug signing_key.pem \
