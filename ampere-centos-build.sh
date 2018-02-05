@@ -60,6 +60,7 @@ echo "Building for generic release tag ${RELBUILD}"
 
 rpmbuild --target aarch64 --define "%_topdir `pwd`" --define "buildid .${RELBUILD}+amp" --without debug --without debuginfo --without tools --without perf -ba ${CENTOSSPECFILE}
 
+cd RPMS/aarch64; md5sum *.rpm > ${CENTOSNAMEPREFIX}-${RELBUILD}_md5sum.txt; cd -
 cd RPMS/; tar -cJf ../${CENTOSNAMEPREFIX}-${RELBUILD}.tar.xz aarch64;cd -
 tar -cJf ${CENTOSNAMEPREFIX}-${RELBUILD}.src.tar.xz SRPMS
 
@@ -72,6 +73,7 @@ echo "Building for optimized release tag ${RELBUILD}"
 
 rpmbuild --target aarch64 --define "%_topdir `pwd`" --define "buildid .${RELBUILD}+amp.ilp32" --without debug --without debuginfo --without tools --without perf -ba ${CENTOSOPTIMIZESPECFILE}
 
+cd RPMS/aarch64; md5sum *.rpm > ${CENTOSNAMEPREFIX}-${RELBUILD}.ilp32_md5sum.txt; cd -
 cd RPMS/; tar -cJf ../${CENTOSNAMEPREFIX}-${RELBUILD}.ilp32.tar.xz aarch64;cd -
 tar -cJf ${CENTOSNAMEPREFIX}-${RELBUILD}.ilp32-src.tar.xz SRPMS
 rm -fr RPMS/aarch64/* SRPMS/*
