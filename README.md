@@ -1,2 +1,1 @@
-# centos
-Ampere CentOS kernel
+Ampere CentOS kernel RPM build script
