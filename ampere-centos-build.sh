@@ -9,8 +9,8 @@
 # These need to match with the definition in .spec file
 #
 echo off
-AMP_TOOLCHAIN_VER=9.0.7-le
-AMP_COMPILER_PATH=/opt/amp/${AMP_TOOLCHAIN_VER}/usr/bin
+AMP_TOOLCHAIN_VER=7.3.0
+AMP_COMPILER_PATH=/opt/amp/${AMP_TOOLCHAIN_VER}/bin
 CROSS_COMPILER_PATH=/tools/arm/armv8/Theobroma/opt/amp-aarch64/${AMP_TOOLCHAIN_VER}/bin
 
 MACHINE_TYPE=`uname -m`
@@ -23,7 +23,7 @@ if [ ${MACHINE_TYPE} = 'aarch64' ]; then
    fi
 fi
 if [ ${MACHINE_TYPE} = 'x86_64' ]; then
-   export CROSS_COMPILE=aarch64-apm-linux-gnu-
+   export CROSS_COMPILE=aarch64-amp-linux-gnu-
    if [ -d "$CROSS_COMPILER_PATH" ]; then
         PATH=${CROSS_COMPILER_PATH}:$PATH
         export PATH
