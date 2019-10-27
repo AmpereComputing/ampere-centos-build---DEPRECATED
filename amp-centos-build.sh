@@ -8,7 +8,27 @@
 #
 # These need to match with the definition in .spec file
 #
-echo off
+set -x
+
+#AMP_TOOLCHAIN_VER=ampere-8.3.0-20190830
+#AMP_COMPILER_LOCALPATH=/opt/amp/${AMP_TOOLCHAIN_VER}/bin
+#CROSS_COMPILER_NFSPATH=/tools/theobroma/gcc/${AMP_TOOLCHAIN_VER}/bin
+#NATIVE_COMPILER_NFSPATH=/tools/theobroma/gcc/${AMP_TOOLCHAIN_VER}/native/${AMP_TOOLCHAIN_VER}/bin
+
+MACHINE_TYPE=`uname -m`
+
+if [ ${MACHINE_TYPE} = 'aarch64' ]; then
+   export -n CROSS_COMPILE
+#   if [ -d "$AMP_COMPILER_LOCALPATH" ]; then
+#        PATH=${AMP_COMPILER_LOCALPATH}:$PATH
+#        export PATH
+#   elif [ -d "$NATIVE_COMPILER_NFSPATH" ]; then
+#        PATH=${NATIVE_COMPILER_NFSPATH}:$PATH
+#        export PATH
+#   fi
+else
+   export CROSS_COMPILE=aarch64-ampere-linux-gnu-
+fi
 
 TODAY=`date +%y%m%d`
 RELBUILD="${TODAY}"
@@ -31,7 +51,7 @@ rm -fr ${LINUX_SRC} SOURCES/linux-${rpmversion}-${pkgrelease}.tar.xz
 cp -r ../amp-centos ${LINUX_SRC}
 cd ${LINUX_SRC};make distclean;rm -fr .git;cd -
 tar -cJf SOURCES/linux-${rpmversion}-${pkgrelease}.tar.xz ${LINUX_SRC}
-rm -fr ${LINUX_SRC} RPMS/aarch64/* SRPMS/*
+rm -fr ${LINUX_SRC} RPMS SRPMS
 
 echo "Building for generic release tag ${RELBUILD}"
 
@@ -39,12 +59,15 @@ echo "Building for generic release tag ${RELBUILD}"
 #sed -i "s/ buildid \..*/ buildid \.${RELBUILD}+amp/g" ${CENTOSSPECFILE}
 
 rpmbuild --target aarch64 --define "%_topdir `pwd`" --define "buildid .${RELBUILD}+amp" --without debug --without debuginfo --without tools --without perf -ba ${CENTOSSPECFILE}
+if [ $? -ne 0 ]; then
+  exit $?
+fi
 
 cd RPMS/aarch64; md5sum *.rpm > ${CENTOSNAMEPREFIX}-${RELBUILD}_md5sum.txt; cd -
 cd RPMS/; tar -cJf ../${CENTOSNAMEPREFIX}-${RELBUILD}.tar.xz aarch64;cd -
 tar -cJf ${CENTOSNAMEPREFIX}-${RELBUILD}.src.tar.xz SRPMS
 
-rm -rf RPMS/aarch64/* SRPMS/*
+rm -rf RPMS SRPMS
 
 echo "Building for optimized release tag ${RELBUILD}"
 
@@ -52,6 +75,10 @@ echo "Building for optimized release tag ${RELBUILD}"
 #sed -i "s/ buildid \..*/ buildid \.${RELBUILD}+amp.opt/g" ${CENTOSOPTIMIZESPECFILE}
 
 rpmbuild --target aarch64 --define "%_topdir `pwd`" --define "buildid .${RELBUILD}+amp.opt" --without debug --without debuginfo --without tools --without perf -ba ${CENTOSOPTIMIZESPECFILE}
+
+if [ $? -ne 0 ]; then
+  exit $?
+fi
 
 cd RPMS/aarch64; md5sum *.rpm > ${CENTOSNAMEPREFIX}-${RELBUILD}.opt_md5sum.txt; cd -
 cd RPMS/; tar -cJf ../${CENTOSNAMEPREFIX}-${RELBUILD}.opt.tar.xz aarch64;cd -
