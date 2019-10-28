@@ -10,22 +10,22 @@
 #
 set -x
 
-#AMP_TOOLCHAIN_VER=ampere-8.3.0-20190830
-#AMP_COMPILER_LOCALPATH=/opt/amp/${AMP_TOOLCHAIN_VER}/bin
-#CROSS_COMPILER_NFSPATH=/tools/theobroma/gcc/${AMP_TOOLCHAIN_VER}/bin
-#NATIVE_COMPILER_NFSPATH=/tools/theobroma/gcc/${AMP_TOOLCHAIN_VER}/native/${AMP_TOOLCHAIN_VER}/bin
+AMP_TOOLCHAIN_VER=ampere-8.3.0-20191025
+AMP_COMPILER_LOCALPATH=/opt/amp/${AMP_TOOLCHAIN_VER}/bin
+CROSS_COMPILER_NFSPATH=/tools/theobroma/gcc/${AMP_TOOLCHAIN_VER}/bin
+NATIVE_COMPILER_NFSPATH=/tools/theobroma/gcc/${AMP_TOOLCHAIN_VER}/native/${AMP_TOOLCHAIN_VER}/bin
 
 MACHINE_TYPE=`uname -m`
 
 if [ ${MACHINE_TYPE} = 'aarch64' ]; then
    export -n CROSS_COMPILE
-#   if [ -d "$AMP_COMPILER_LOCALPATH" ]; then
-#        PATH=${AMP_COMPILER_LOCALPATH}:$PATH
-#        export PATH
-#   elif [ -d "$NATIVE_COMPILER_NFSPATH" ]; then
-#        PATH=${NATIVE_COMPILER_NFSPATH}:$PATH
-#        export PATH
-#   fi
+   if [ -d "$AMP_COMPILER_LOCALPATH" ]; then
+        PATH=${AMP_COMPILER_LOCALPATH}:$PATH
+        export PATH
+   elif [ -d "$NATIVE_COMPILER_NFSPATH" ]; then
+        PATH=${NATIVE_COMPILER_NFSPATH}:$PATH
+        export PATH
+   fi
 else
    export CROSS_COMPILE=aarch64-ampere-linux-gnu-
 fi
