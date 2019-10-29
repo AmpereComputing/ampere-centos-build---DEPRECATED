@@ -29,7 +29,7 @@ if [ ${MACHINE_TYPE} = 'aarch64' ]; then
 else
    export CROSS_COMPILE=aarch64-ampere-linux-gnu-
 fi
-
+export XZ_OPT="--threads=0"
 TODAY=`date +%y%m%d`
 RELBUILD="${TODAY}"
 if [ -n "${1}" ]; then
