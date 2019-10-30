@@ -1,0 +1,107 @@
+README.centos.ampere
+---------------------
+
+Refer to eMAG_SW_CentOS_8.0_Installation_Guide.pdf for up-to-date
+installation instructions.
+
+For any board-specific instructions, refer to the individual board's
+User Manual addendum.
+
+For any customer-specific special installation, contact appropriate
+Ampere FAE for instructions.
+
+**********************************************************
+CONTENT:
+**********************************************************
+  README.centos.ampere: This README file.
+  eMAG_SW_CentOS_8.0_Installation_Guide.pdf: Installation guide
+  amp_sw_centos_8.0-yymmdd.opt.tar.xz
+      - APM CentOS 8.0 optimized kernel
+      - The kernel config options are derived from vanilla CentOS 8.0 config
+        options for aarch64 and include: 
+          + Disable NETFILTER
+      - Other eMAG platforms specific config options:
+          + /dev/mem access support	  
+		  
+      - List of binaries:
+          kernel-4.18.0-80.11.2.el8.yymmdd+amp.opt.aarch64.rpm
+          kernel-core-4.18.0-80.11.2.el8.yymmdd+amp.opt.aarch64.rpm
+          kernel-cross-headers-4.18.0-80.11.2.el8.yymmdd+amp.opt.aarch64.rpm
+          kernel-devel-4.18.0-80.11.2.el8.yymmdd+amp.opt.aarch64.rpm
+          kernel-headers-4.18.0-80.11.2.el8.yymmdd+amp.opt.aarch64.rpm
+          kernel-modules-4.18.0-80.11.2.el8.yymmdd+amp.opt.aarch64.rpm
+          kernel-modules-extra-4.18.0-80.11.2.el8.yymmdd+amp.opt.aarch64.rpm
+
+  amp_sw_centos_8.0-yymmdd.tar.xz
+      - APM CentOS 8.0 generic kernel
+      - The kernel config options are derived from vanilla CentOS 8.0 config
+        options for aarch64
+      - List of binaries:
+          kernel-4.18.0-80.11.2.el8.yymmdd+amp.aarch64.rpm
+          kernel-core-4.18.0-80.11.2.el8.yymmdd+amp.aarch64.rpm
+          kernel-cross-headers-4.18.0-80.11.2.el8.yymmdd+amp.aarch64.rpm
+          kernel-devel-4.18.0-80.11.2.el8.yymmdd+amp.aarch64.rpm
+          kernel-headers-4.18.0-80.11.2.el8.yymmdd+amp.aarch64.rpm
+          kernel-modules-4.18.0-80.11.2.el8.yymmdd+amp.aarch64.rpm
+          kernel-modules-extra-4.18.0-80.11.2.el8.yymmdd+amp.aarch64.rpm
+
+      - Other eMAG platforms specific config options:
+          + /dev/mem access support
+		  
+  amp_sw_centos_8.0-yymmdd.opt-src.tar.xz
+      - Source RPM package for APM CentOS 8.0 optimized kernel
+      - List of binaries:
+          kernel-aarch64-4.18.0-80.11.2.el8.yymmdd+amp.opt.src.rpm
+
+  amp_sw_centos_8.0-yymmdd.src.tar.xz
+      - Source RPM package for APM CentOS 8.0 generic kernel
+      - List of binaries:
+          Kernel-aarch64-4.18.0-80.11.2.el8.yymmdd+amp.src.rpm
+
+**********************************************************
+INSTALLATION:
+**********************************************************
+to install the RPMs.
++ Use "rpm -ivh" to install the source RPMs (src.rpm).
++ Use "rpm -ivh kernel-4.18.0-80.11.2.el8.yymmdd+amp.aarch64.rpm
+ kernel-core-4.18.0-80.11.2.el8.yymmdd+amp.aarch64.rpm
+ kernel-modules-4.18.0-80.11.2.el8.yymmdd+amp.aarch64.rpm
+ kernel-modules-extra-4.18.0-80.11.2.el8.yymmdd+amp.aarch64.rpm"
+ to install the kernel.
+
++ Refer to the accompanied APM CentOS installation guide for detailed
+
+**********************************************************
+Quick Notes:
+**********************************************************
+
+The CPU frequency can be scaled accordingly to the Linux CPU frequency
+scaling interface. User can use the application cpupower to change
+core frequency and etc.
+
+To display the core frequency info:
+
+   # cpupower frequency-info
+
+To set the core governor (for example: userspace governor):
+
+  # cpupower frequency-set -g userspace
+
+To set the core frequency (for example: 1GHz):
+
+  # cpupower frequency-set -f 1000000
+
+NOTE: User may switch to userspace governor to explicitly change the core
+frequency.
+
+**********************************************************
+BUILDS:
+**********************************************************
+
+Build 191031
+------------
++ Changelog
+
++ Bug fixes:
+
++ Known issues:
