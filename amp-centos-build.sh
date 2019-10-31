@@ -10,7 +10,7 @@
 #
 set -x
 
-AMP_TOOLCHAIN_VER=ampere-8.3.0-20191025
+AMP_TOOLCHAIN_VER=ampere-8.3.0-20191025-dynamic-nosysroot
 AMP_COMPILER_LOCALPATH=/opt/amp/${AMP_TOOLCHAIN_VER}/bin
 CROSS_COMPILER_NFSPATH=/tools/theobroma/gcc/${AMP_TOOLCHAIN_VER}/bin
 NATIVE_COMPILER_NFSPATH=/tools/theobroma/gcc/${AMP_TOOLCHAIN_VER}/native/${AMP_TOOLCHAIN_VER}/bin
