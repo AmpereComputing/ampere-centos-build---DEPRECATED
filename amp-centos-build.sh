@@ -30,7 +30,7 @@ else
    export CROSS_COMPILE=aarch64-ampere-linux-gnu-
 fi
 export XZ_OPT="--threads=0"
-TODAY=`date +%y%m%d`
+TODAY=`date +%Y%m%d`
 RELBUILD="${TODAY}"
 if [ -n "${1}" ]; then
 	RELBUILD=${1}
@@ -58,7 +58,7 @@ echo "Building for generic release tag ${RELBUILD}"
 #Update build release tag to spec file
 #sed -i "s/ buildid \..*/ buildid \.${RELBUILD}+amp/g" ${CENTOSSPECFILE}
 
-rpmbuild --target aarch64 --define "%_topdir `pwd`" --define "buildid .${RELBUILD}+amp" --without debug --without debuginfo --without tools --without perf -ba ${CENTOSSPECFILE}
+rpmbuild --target aarch64 --define "%_topdir `pwd`" --define "buildid .${RELBUILD}+amp" --without debug --with debuginfo --without tools --without perf -ba ${CENTOSSPECFILE}
 if [ $? -ne 0 ]; then
   exit $?
 fi
@@ -74,7 +74,7 @@ echo "Building for optimized release tag ${RELBUILD}"
 #Update build release tag to spec file
 #sed -i "s/ buildid \..*/ buildid \.${RELBUILD}+amp.opt/g" ${CENTOSOPTIMIZESPECFILE}
 
-rpmbuild --target aarch64 --define "%_topdir `pwd`" --define "buildid .${RELBUILD}+amp.opt" --without debug --without debuginfo --without tools --without perf -ba ${CENTOSOPTIMIZESPECFILE}
+rpmbuild --target aarch64 --define "%_topdir `pwd`" --define "buildid .${RELBUILD}+amp.opt" --without debug --with debuginfo --without tools --without perf -ba ${CENTOSOPTIMIZESPECFILE}
 
 if [ $? -ne 0 ]; then
   exit $?
