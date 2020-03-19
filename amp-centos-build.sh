@@ -14,6 +14,7 @@ AMP_TOOLCHAIN_VER=ampere-8.3.0-20191025-dynamic-nosysroot
 AMP_COMPILER_LOCALPATH=/opt/amp/${AMP_TOOLCHAIN_VER}/bin
 CROSS_COMPILER_NFSPATH=/tools/theobroma/gcc/${AMP_TOOLCHAIN_VER}/bin
 NATIVE_COMPILER_NFSPATH=/tools/theobroma/gcc/${AMP_TOOLCHAIN_VER}/native/${AMP_TOOLCHAIN_VER}/bin
+GCC_VERSION=80300
 
 MACHINE_TYPE=`uname -m`
 
@@ -49,6 +50,14 @@ pkgrelease=${PKGRELEASE}
 LINUX_SRC=linux-${rpmversion}-${pkgrelease}
 rm -fr ${LINUX_SRC} SOURCES/linux-${rpmversion}-${pkgrelease}.tar.xz
 cp -r ../amp-centos ${LINUX_SRC}
+echo "# arm64" > SOURCES/kernel-aarch64-emag.config
+echo "CONFIG_GCC_VERSION=${GCC_VERSION}" >> SOURCES/kernel-aarch64-emag.config
+echo "CONFIG_LOCALVERSION=\"\"" >> SOURCES/kernel-aarch64-emag.config
+cat ${LINUX_SRC}/arch/arm64/configs/emag_defconfig >> SOURCES/kernel-aarch64-emag.config
+echo "# arm64" > SOURCES/kernel-aarch64-emag-optimized.config
+echo "CONFIG_GCC_VERSION=${GCC_VERSION}" >> SOURCES/kernel-aarch64-emag-optimized.config
+echo "CONFIG_LOCALVERSION=\"\"" >> SOURCES/kernel-aarch64-emag-optimized.config
+cat ${LINUX_SRC}/arch/arm64/configs/emag_optimized_defconfig >> SOURCES/kernel-aarch64-emag-optimized.config
 cd ${LINUX_SRC};make distclean;rm -fr .git;cd -
 tar -cJf SOURCES/linux-${rpmversion}-${pkgrelease}.tar.xz ${LINUX_SRC}
 rm -fr ${LINUX_SRC} RPMS SRPMS
