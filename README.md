@@ -4,7 +4,7 @@ Ampere CentOS 8.0 Build
 System Requirements
 ------------
 
-- eMAG/QS (eMAG2) system
+- Ampere Altra system
 - CentOS 8 
 - Ampere Toolchain 8.3.0
 
@@ -37,9 +37,8 @@ First, install the necessary development packages (if not done already).
 Installing Ampere Computing Toolchain
 ------------
 
-Install the toolchain on the board
+Install the toolchain on the board. Get Ampere 8.3.0 toolchain from Ampere support team.
 ```
-# wget --no-check-certificate https://den-swweb.amperecomputing.com/ampsw/toolchains/8.3.0/20191025/ampere-8.3.0-20191025-dynamic-nosysroot-nativetools.tar.xz
 # mkdir -p /opt/amp
 # tar -xf ampere-8.3.0-20191025-dynamic-nosysroot-nativetools.tar.xz -C /opt/amp
 ```
@@ -53,18 +52,18 @@ Set PATH to point to the Ampere Toolchain
 Building Ampere CentOS
 ------------
 
-Clone amp-centos kernel and amp-centos-build source
+Clone ampere-centos kernel and ampere-centos-build source
 ```
-# git clone git@gitlab.com:AmpereComputing/os/linux/amp-centos.git
-# cd amp-centos ; git checkout amp-centos-8.0 ; cd ..
-# git clone git@gitlab.com:AmpereComputing/os/linux/amp-centos-build.git
-# cd amp-centos-build ; git checkout amp-centos-8.0-build ; cd ..
+# git clone https://github.com/AmpereComputing/ampere-centos-kernel
+# cd ampere-centos-kernel ; git checkout amp-centos-8.0-kernel ; cd ..
+# git clone https://github.com/AmpereComputing/ampere-centos-build
+# cd ampere-centos-build ; git checkout amp-centos-8.0-build ; cd ..
 ```
-Package amp-centos kernel source, you can find rpmversion, pkgrelease in SPECS/kernel-emag.spec
+Package ampere-centos kernel source, you can find rpmversion, pkgrelease in SPECS/kernel-emag.spec
 Currently,  rpmversion=4.18.0, pkgrelease=80.11.2.el8_0
 ```
-# cd amp-centos-build
-# cp -r ../amp-centos linux-4.18.0-80.11.2.el8_0
+# cd ampere-centos-build
+# cp -r ../ampere-centos-kernel linux-4.18.0-80.11.2.el8_0
 # cd linux-4.18.0-80.11.2.el8_0
 # make distclean
 # rm -fr .git
@@ -85,10 +84,11 @@ Building Ampere CentOS by script
 ------------
 
 ```
-# git clone git@gitlab.com:AmpereComputing/os/linux/amp-centos.git
-# cd amp-centos ; git checkout amp-centos-8.0 ; cd ..
-# git clone git@gitlab.com:AmpereComputing/os/linux/amp-centos-build.git
-# cd amp-centos-build ; 
+# git clone https://github.com/AmpereComputing/ampere-centos-kernel
+# cd ampere-centos-kernel ; git checkout amp-centos-8.0-kernel ; cd ..
+# git clone https://github.com/AmpereComputing/ampere-centos-build
+# cd ampere-centos-build ; git checkout amp-centos-8.0-build ; cd ..
+# cd ampere-centos-build ; 
 # git checkout amp-centos-8.0-build
 # ./amp-centos-build.sh
 ```
