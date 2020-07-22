@@ -1,18 +1,28 @@
-Ampere CentOS kernel RPM build script
+![Ampere Computing](https://avatars2.githubusercontent.com/u/34519842?s=400&u=1d29afaac44f477cbb0226139ec83f73faefe154&v=4)
+
+
+# Ampere CentOS kernel RPM build script
 
 This is Ampere CentOS kernel RPM build script to support Ampere eMag
 SoC's. These scripts are used to create RPM files for Ampere CentOS
 kernel.
 
-How to build Ampere CentOS RPM:
+## How to build Ampere CentOS RPM:
 1. Clone ampere-centos-kernel
- # mkdir ampere-centos
- # cd ampere-centos
- # git clone https://github.com/AmpereComputing/ampere-centos-kernel
- # git clone https://github.com/AmpereComputing/ampere-centos-build
+
+```
+# mkdir ampere-centos
+# cd ampere-centos
+# git clone https://github.com/AmpereComputing/ampere-centos-kernel
+# git clone https://github.com/AmpereComputing/ampere-centos-build
+```
+
 2. Build Ampere CentOS RPM files
- # cd ampere-centos-build
- # ./ampere-centos-build.sh
+
+```
+# cd ampere-centos-build
+# ./ampere-centos-build.sh
+```
 
 When the above steps are completed, the Ampere CentOS RPM files are
 located at:
