@@ -1,3 +1,6 @@
+# DEPRECATED
+## This repository is deprecated and set to archive status. It will eventually be deleted.
+
 ![Ampere Computing](https://avatars2.githubusercontent.com/u/34519842?s=400&u=1d29afaac44f477cbb0226139ec83f73faefe154&v=4)
 
 
@@ -36,3 +39,5 @@ The amp_sw_centos_7.4-yymmdd.tar.xz is the non-optimized version of
 the Ampere CentOS kernel.
 The amp_sw_centos_7.4-yymmdd.ilp32.tar.xz is the optimized version of
 the Ampere CentOS kernel.
+
+# DEPRECATED
