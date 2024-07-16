@@ -1,3 +1,6 @@
+DEPRECATED
+This repository is deprecated and set to archive status. It will eventually be deleted.
+
 Ampere CentOS 8.0 Build
 ===============
 
@@ -132,4 +135,4 @@ Or extract amp_sw_centos_8.0-ddmmyy.opt.tar.xz
 # yum -y localinstall kernel*
 ```
 
-  
+DEPRECATED  
