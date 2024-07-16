@@ -1,3 +1,7 @@
+DEPRECATED
+This repository is deprecated and set to archive status. It will eventually be deleted.
+
+
 Ampere CentOS kernel RPM build script
 
 This is Ampere CentOS kernel RPM build script to support Ampere eMag
@@ -26,3 +30,5 @@ The amp_sw_centos_7.5-yymmdd.tar.xz is the non-optimized version of
 the Ampere CentOS kernel.
 The amp_sw_centos_7.5-yymmdd.ilp32.tar.xz is the optimized version of
 the Ampere CentOS kernel.
+
+DEPRECATED
